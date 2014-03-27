@@ -1,3 +1,5 @@
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.util.Map;
 
 public class Variable implements Segment {
@@ -7,8 +9,22 @@ public class Variable implements Segment {
         this.name = name;
     }
 
+    @Override
     public boolean equals(Object other) {
-        return name.equals(((Variable) other).name);
+        if (other !=  null && other.getClass() == this.getClass()) {
+            Variable variable = (Variable) other;
+            if (variable.name == null || name == null) {
+                return false;
+            } else {
+                return name.equals(variable.name);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(name).toHashCode();
     }
 
     public String evaluate(Map<String, String> variables) {
@@ -18,6 +34,7 @@ public class Variable implements Segment {
         return variables.get(name);
     }
 
+    @Override
     public String toString() {
         return name;
     }
