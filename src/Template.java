@@ -22,7 +22,7 @@ public class Template {
     }
 
     private String concatenate(List<Segment> segments) {
-        StringBuilder result = new StringBuilder();
+        StringBuffer result = new StringBuffer();
         for (Segment segment : segments) {
             result.append(segment.evaluate(variableValues));
         }
